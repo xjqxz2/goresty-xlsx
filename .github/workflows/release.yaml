@@ -1,5 +1,6 @@
 # .github/workflows/release.yaml
 
+on: push
 name: Build Release
 jobs:
   release:
@@ -10,7 +11,7 @@ jobs:
       - uses: actions/setup-go@v2 # 配置 Go 环境
         with:
           go-version: "1.17" # 改成自己的版本
-          
+
       - run: apt install mingw-w64 -y
       - run: make linux
       - run: make windows
