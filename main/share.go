@@ -47,6 +47,26 @@ func save(resourceId int) {
 	shex.Release(resourceId)
 }
 
+//export registerStyle
+func registerStyle(resourceId int, style string) int {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+
+	styleId, err := xlsx.RegisterStyle(style)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		return -1
+	}
+
+	return styleId
+}
+
+//export setCellStyle
+func setCellStyle(resourceId int, cellX, cellY string, styleId int) {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.SetCellStyle(cellX, cellY, styleId)
+}
+
 func main() {
 
 }

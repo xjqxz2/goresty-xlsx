@@ -31,6 +31,8 @@ extern void cell(GoInt resourceId, GoString tabIndex, GoString val);
 extern void selectSheet(GoInt resourceId, GoString sheet);
 extern void merge(GoInt resourceId, GoString si, GoString ei);
 extern void save(GoInt resourceId);
+extern GoInt registerStyle(GoInt resourceId, GoString style);
+extern void setCellStyle(GoInt resourceId, GoString cellX, GoString cellY, GoInt styleId);
 ]]
 
 Excel = {
@@ -86,7 +88,41 @@ function Excel:save()
     shex.save(self.resourceId)
 end
 
+--  注册Excel表样式
+--  样式表请查阅这里 https://xuri.me/excelize/zh-hans/style.html 
+function Excel:registerStyle(style) 
+    return shex.registerStyle(
+        self.resourceId,
+        GoString(style)
+    )
+end 
+
+--  设置单元格样式
+function Excel:setCellStyle(cellIndexX ,cellIndexY,styleId)
+    shex.setCellStyle(
+        self.resourceId, 
+        GoString(cellIndexX),
+        GoString(cellIndexY),
+        tonumber(styleId)
+    )
+end
+
+
 local table1 = Excel:new("表格1.xlsx")
+
+--  预设单元格样式1
+-- 蓝低无边框样式
+local style1 = table1:registerStyle("{\"fill\":{\"type\":\"pattern\",\"color\":[\"#E0EBF5\"],\"pattern\":1}}")
+
+-- 黑底无边框样式
+local style2 = table1:registerStyle("{\"fill\":{\"type\":\"pattern\",\"color\":[\"#000000\"],\"pattern\":1}}")
+
+--  将 A1-E10 区域设置为 Style1 的样式，即蓝底无线框样式
+table1:setCellStyle("A1","E10",style1)
+
+--  将 A5-B6 区域设置为 Style1 的样式，即黑底无线框样式
+table1:setCellStyle("A5","B6",style2)
+
 table1:cell("A3","H-1")
 table1:sel("Sheet2")
 table1:cell("B2","你好")
