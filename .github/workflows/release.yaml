@@ -20,7 +20,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with: # 将下述可执行文件 release 上去
           files: |
-            libshex.so
-            libshex.dll
+            bin/libshex.so
+            bin/libshex.dll
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
