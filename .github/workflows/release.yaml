@@ -1,0 +1,24 @@
+# .github/workflows/release.yaml
+
+name: Build Release
+jobs:
+  release:
+    if: startsWith(github.ref, 'refs/tags/') # 只有这次 Commit 是 创建 Tag 时，才进行后续发布操作
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main # checkout 代码
+      - uses: actions/setup-go@v2 # 配置 Go 环境
+        with:
+          go-version: "1.17" # 改成自己的版本
+      
+      - run: make linux
+      - run: make windows
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with: # 将下述可执行文件 release 上去
+          files: |
+            libshex.so
+            libshex.dll
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
