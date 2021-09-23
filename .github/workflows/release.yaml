@@ -21,6 +21,7 @@ jobs:
         with: # 将下述可执行文件 release 上去
           files: |
             bin/libshex.so
-            bin/libshex.dll
+            bin/libshex_x64_86.dll
+            bin/libshex_x86.dll
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
