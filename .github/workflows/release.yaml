@@ -20,7 +20,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with: # 将下述可执行文件 release 上去
           files: |
-            bin/linux_x64_84.tar.gz
+            bin/linux_x64_86.tar.gz
             bin/windows_x64-86.tar.gz
             bin/windows_x86.tar.gz
         env:
