@@ -20,8 +20,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with: # 将下述可执行文件 release 上去
           files: |
-            bin/libshex.so
-            bin/libshex_x64_86.dll
-            bin/libshex_x86.dll
+            bin/linux_x64_84.tar.gz
+            bin/windows_x64-86.tar.gz
+            bin/windows_x86.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
