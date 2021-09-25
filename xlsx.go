@@ -58,6 +58,14 @@ func (p *XLSXFile) SetCellStyle(cellX, cellY string, styleId int) {
 	p.File.SetCellStyle(p.Sheet, cellX, cellY, styleId)
 }
 
+func (p *XLSXFile) SetColWidth(startCol, endCol string, width float64) {
+	p.File.SetColWidth(p.Sheet, startCol, endCol, width)
+}
+
+func (p *XLSXFile) SetRowHeight(row int, height float64) {
+	p.File.SetRowHeight(p.Sheet, row, height)
+}
+
 func (p *XLSXFile) Save() bool {
 	return p.File.SaveAs(p.Name) == nil
 }

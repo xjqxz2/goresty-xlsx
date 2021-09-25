@@ -67,6 +67,18 @@ func setCellStyle(resourceId int, cellX, cellY string, styleId int) {
 	xlsx.SetCellStyle(cellX, cellY, styleId)
 }
 
+//export setColWidth
+func setColWidth(resourceId int, startCol, endCol string, width float64) {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.SetColWidth(startCol, endCol, width)
+}
+
+//export setRowHeight
+func setRowHeight(resourceId int, row int, height float64) {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.SetRowHeight(row, height)
+}
+
 func main() {
 
 }
