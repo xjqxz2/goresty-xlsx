@@ -110,14 +110,14 @@ function Excel:setCellStyle(cellIndexX ,cellIndexY,styleId)
 end
 
 --  设置列宽
-function Excel:setColWidth() 
+function Excel:setColWidth(startCol ,endCol ,width) 
     --  设置 A 列 shex.setColWidth(self.resourceId,GoString("A"),GoString("A"),50.1)
     --  设置 A ~ C 列 shex.setColWidth(self.resourceId,GoString("A"),GoString("C"),50.1)
     shex.setColWidth(self.resourceId,GoString("A"),GoString("A"),50.1)
 end
 
 --  设置行高
-function Excel:setRowHeight() 
+function Excel:setRowHeight(row ,height) 
     shex.setRowHeight(self.resourceId,3,20.1)
 end
 
