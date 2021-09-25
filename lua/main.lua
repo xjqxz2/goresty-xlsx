@@ -33,6 +33,8 @@ extern void merge(GoInt resourceId, GoString si, GoString ei);
 extern void save(GoInt resourceId);
 extern GoInt registerStyle(GoInt resourceId, GoString style);
 extern void setCellStyle(GoInt resourceId, GoString cellX, GoString cellY, GoInt styleId);
+extern void setColWidth(GoInt resourceId, GoString startCol, GoString endCol, GoFloat64 width);
+extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
 ]]
 
 Excel = {
@@ -105,6 +107,18 @@ function Excel:setCellStyle(cellIndexX ,cellIndexY,styleId)
         GoString(cellIndexY),
         tonumber(styleId)
     )
+end
+
+--  设置列宽
+function Excel:setColWidth() 
+    --  设置 A 列 shex.setColWidth(self.resourceId,GoString("A"),GoString("A"),50.1)
+    --  设置 A ~ C 列 shex.setColWidth(self.resourceId,GoString("A"),GoString("C"),50.1)
+    shex.setColWidth(self.resourceId,GoString("A"),GoString("A"),50.1)
+end
+
+--  设置行高
+function Excel:setRowHeight() 
+    shex.setRowHeight(self.resourceId,3,20.1)
 end
 
 -- 这是一个 DEMO 
