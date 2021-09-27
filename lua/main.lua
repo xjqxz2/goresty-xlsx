@@ -127,7 +127,7 @@ function Excel:setRowHeight(row ,height)
 end
 
 -- 这是一个 DEMO 
-local table1 = Excel:new("表格1.xlsx")
+local table1 = Excel:new("表格1.xlsx","HELL")
 
 --  预设单元格样式1
 -- 蓝低无边框样式

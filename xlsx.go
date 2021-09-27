@@ -16,15 +16,18 @@ type XLSXFile struct {
 }
 
 //	Select a sheet
-func (p *XLSXFile) Select(sheet string) *XLSXFile {
+func (p *XLSXFile) Select(sheet string, replaceDefaultSheetName bool) *XLSXFile {
 	index := 0
 
 	if value, ok := p.Sheets.Load(sheet); ok {
 		index = value.(int)
-		p.File.SetActiveSheet(index)
 	} else {
 		index = p.File.NewSheet(sheet)
 		p.Sheets.Store(sheet, index)
+
+		if replaceDefaultSheetName {
+			p.File.DeleteSheet("Sheet1")
+		}
 	}
 
 	p.File.SetActiveSheet(index)

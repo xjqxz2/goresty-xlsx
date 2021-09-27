@@ -31,7 +31,7 @@ func cell(resourceId int, tabIndex, val string) {
 //export selectSheet
 func selectSheet(resourceId int, sheet string) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.Select(sheet)
+	xlsx.Select(sheet, false)
 }
 
 //export merge
