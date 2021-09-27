@@ -18,8 +18,8 @@ func println(str string) {
 }
 
 //export createExcelFile
-func createExcelFile(filename string) int {
-	return shex.CreateXLSXFile(filename)
+func createExcelFile(filename string, defaultSheetName string) int {
+	return shex.CreateXLSXFile(filename, defaultSheetName)
 }
 
 //export cell

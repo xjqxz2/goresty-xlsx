@@ -17,7 +17,7 @@ var (
 )
 
 //	Create a xls file handle in resource space
-func CreateXLSXFile(name string) (handle int) {
+func CreateXLSXFile(name string, defaultSheetName string) (handle int) {
 	rmu.Lock()
 	defer rmu.Unlock()
 
@@ -34,8 +34,14 @@ func CreateXLSXFile(name string) (handle int) {
 		Name:       name,
 	}
 
-	//	Select Sheet
-	xlsx.Select("Sheet1")
+	//	Set default sheet name ,if [defaultSeheetName] is empty
+	//	The sheet name is sheet1
+	if defaultSheetName == "" {
+		//	Select Sheet
+		xlsx.Select("Sheet1")
+	} else {
+		xlsx.Select(defaultSheetName)
+	}
 
 	//	Save XLSFile in resource space
 	resources[resourceId] = xlsx

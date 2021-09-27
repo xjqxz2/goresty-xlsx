@@ -70,7 +70,7 @@ extern "C" {
 
 extern GoInt sum(GoInt a, GoInt b);
 extern void println(GoString str);
-extern GoInt createExcelFile(GoString filename);
+extern GoInt createExcelFile(GoString filename, GoString defaultSheetName);
 extern void cell(GoInt resourceId, GoString tabIndex, GoString val);
 extern void selectSheet(GoInt resourceId, GoString sheet);
 extern void merge(GoInt resourceId, GoString si, GoString ei);

@@ -26,7 +26,7 @@ typedef struct { void *data; GoInt len; GoInt cap; } GoSlice;
 typedef _GoString_ GoString;
 extern GoInt sum(GoInt a, GoInt b);
 extern void println(GoString str);
-extern GoInt createExcelFile(GoString filename);
+extern GoInt createExcelFile(GoString filename, GoString defaultSheetName);
 extern void cell(GoInt resourceId, GoString tabIndex, GoString val);
 extern void selectSheet(GoInt resourceId, GoString sheet);
 extern void merge(GoInt resourceId, GoString si, GoString ei);
@@ -55,12 +55,17 @@ end
 
 
 --  创建一个 Excel 文件
-function Excel:new(filename) 
+function Excel:new(filename,defaultSheetName) 
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     self.filename = filename
-    self.resourceId = shex.createExcelFile(GoString(filename))
+
+    if #defaultSheetName <= 0 then 
+        defaultSheetName = "Sheet1"
+    end 
+
+    self.resourceId = shex.createExcelFile(GoString(filename),GoString(defaultSheetName))
     return o
 end 
 
