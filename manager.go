@@ -70,13 +70,14 @@ func SearchXLSFile(resourceId int) (*XLSXFile, error) {
 	return xlsx, nil
 }
 
+//	释放文件句柄
 func Release(resourceId int) {
 	rmu.Lock()
 	defer rmu.Unlock()
 	delete(resources, resourceId)
 }
 
-//	generate handle id
+//	生成一个随机的文件句柄
 func randomInt() (int, error) {
 	r := rand.New(rand.NewSource(time.Now().UnixMicro()))
 
