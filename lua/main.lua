@@ -36,6 +36,7 @@ extern void setCellStyle(GoInt resourceId, GoString cellX, GoString cellY, GoInt
 extern void setColWidth(GoInt resourceId, GoString startCol, GoString endCol, GoFloat64 width);
 extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
 extern void insertPageBreak(GoInt resourceId, GoString cell);
+extern void setColStyle(GoInt resourceId, GoString columns, GoInt styleId);
 ]]
 
 Excel = {
@@ -130,6 +131,11 @@ end
 -- 插入分页符
 function Excel:insertPageBreak(cell) 
     shex.insertPageBreak(self.resourceId,cell)
+end
+
+-- 设置列样式
+function Excel:setColStyle(columns ,styleId) 
+    shex.setColStyle(self.resourceId,GoString(columns),tonumber(styleId))
 end
 
 -- 这是一个 DEMO 

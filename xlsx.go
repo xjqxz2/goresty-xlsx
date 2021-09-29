@@ -76,3 +76,7 @@ func (p *XLSXFile) Save() bool {
 func (p *XLSXFile) InsertPageBreak(cell string) {
 	p.File.InsertPageBreak(p.Sheet, cell)
 }
+
+func (p *XLSXFile) SetColStyle(columns string, styleId int) {
+	p.File.SetColStyle(p.Sheet, columns, styleId)
+}

@@ -85,6 +85,12 @@ func insertPageBreak(resourceId int, cell string) {
 	xlsx.InsertPageBreak(cell)
 }
 
+//export setColStyle
+func setColStyle(resourceId int, columns string, styleId int) {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.SetColStyle(columns, styleId)
+}
+
 func main() {
 
 }
