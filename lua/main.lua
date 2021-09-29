@@ -35,6 +35,7 @@ extern GoInt registerStyle(GoInt resourceId, GoString style);
 extern void setCellStyle(GoInt resourceId, GoString cellX, GoString cellY, GoInt styleId);
 extern void setColWidth(GoInt resourceId, GoString startCol, GoString endCol, GoFloat64 width);
 extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
+extern void insertPageBreak(GoInt resourceId, GoString cell);
 ]]
 
 Excel = {
@@ -124,6 +125,11 @@ end
 --  设置行高
 function Excel:setRowHeight(row ,height) 
     shex.setRowHeight(self.resourceId,3,20.1)
+end
+
+-- 插入分页符
+function Excel:insertPageBreak(cell) 
+    shex.insertPageBreak(self.resourceId,cell)
 end
 
 -- 这是一个 DEMO 

@@ -79,6 +79,12 @@ func setRowHeight(resourceId int, row int, height float64) {
 	xlsx.SetRowHeight(row, height)
 }
 
+//export insertPageBreak
+func insertPageBreak(resourceId int, cell string) {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.InsertPageBreak(cell)
+}
+
 func main() {
 
 }

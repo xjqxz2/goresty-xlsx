@@ -72,3 +72,7 @@ func (p *XLSXFile) SetRowHeight(row int, height float64) {
 func (p *XLSXFile) Save() bool {
 	return p.File.SaveAs(p.Name) == nil
 }
+
+func (p *XLSXFile) InsertPageBreak(cell string) {
+	p.File.InsertPageBreak(p.Sheet, cell)
+}

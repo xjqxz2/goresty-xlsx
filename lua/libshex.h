@@ -79,6 +79,7 @@ extern GoInt registerStyle(GoInt resourceId, GoString style);
 extern void setCellStyle(GoInt resourceId, GoString cellX, GoString cellY, GoInt styleId);
 extern void setColWidth(GoInt resourceId, GoString startCol, GoString endCol, GoFloat64 width);
 extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
+extern void insertPageBreak(GoInt resourceId, GoString cell);
 
 #ifdef __cplusplus
 }
