@@ -19,25 +19,25 @@ func println(str string) {
 
 //export createExcelFile
 func createExcelFile(filename string, defaultSheetName string) int {
-	return shex.CreateXLSXFile(filename, defaultSheetName)
+	return shex.CreateXLSXFile(luaString(filename), luaString(defaultSheetName))
 }
 
 //export cell
 func cell(resourceId int, tabIndex, val string) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.Cell(tabIndex, val)
+	xlsx.Cell(luaString(tabIndex), luaString(val))
 }
 
 //export selectSheet
 func selectSheet(resourceId int, sheet string) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.Select(sheet, false)
+	xlsx.Select(luaString(sheet), false)
 }
 
 //export merge
 func merge(resourceId int, si, ei string) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.Merge(si, ei)
+	xlsx.Merge(luaString(si), luaString(ei))
 }
 
 //export save
@@ -51,7 +51,7 @@ func save(resourceId int) {
 func registerStyle(resourceId int, style string) int {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
 
-	styleId, err := xlsx.RegisterStyle(style)
+	styleId, err := xlsx.RegisterStyle(luaString(style))
 
 	if err != nil {
 		fmt.Println(err.Error())
@@ -64,13 +64,13 @@ func registerStyle(resourceId int, style string) int {
 //export setCellStyle
 func setCellStyle(resourceId int, cellX, cellY string, styleId int) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.SetCellStyle(cellX, cellY, styleId)
+	xlsx.SetCellStyle(luaString(cellX), luaString(cellY), styleId)
 }
 
 //export setColWidth
 func setColWidth(resourceId int, startCol, endCol string, width float64) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.SetColWidth(startCol, endCol, width)
+	xlsx.SetColWidth(luaString(startCol), luaString(endCol), width)
 }
 
 //export setRowHeight
@@ -82,13 +82,17 @@ func setRowHeight(resourceId int, row int, height float64) {
 //export insertPageBreak
 func insertPageBreak(resourceId int, cell string) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.InsertPageBreak(cell)
+	xlsx.InsertPageBreak(luaString(cell))
 }
 
 //export setColStyle
 func setColStyle(resourceId int, columns string, styleId int) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.SetColStyle(columns, styleId)
+	xlsx.SetColStyle(luaString(columns), styleId)
+}
+
+func luaString(str string) string {
+	return fmt.Sprintf("%s", str)
 }
 
 func main() {

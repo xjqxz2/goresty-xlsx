@@ -79,7 +79,7 @@ func Release(resourceId int) {
 
 //	生成一个随机的文件句柄
 func randomInt() (int, error) {
-	r := rand.New(rand.NewSource(time.Now().UnixMicro()))
+	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	//	retry 99 count
 	for i := 0; i < 99; i++ {
