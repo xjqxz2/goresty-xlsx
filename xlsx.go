@@ -13,6 +13,7 @@ type XLSXFile struct {
 	Name       string
 	File       *excelize.File
 	Sheets     sync.Map
+	StylePool  *StylePool
 }
 
 //	Select a sheet
@@ -47,14 +48,26 @@ func (p *XLSXFile) Merge(start, end string) *XLSXFile {
 	return p
 }
 
+//	注册一个新样式
 func (p *XLSXFile) RegisterStyle(ss string) (styleId int, err error) {
 	var style excelize.Style
 
+	//	解析样式
 	if err := json.Unmarshal([]byte(ss), &style); err != nil {
 		return 0, err
 	}
 
-	return p.File.NewStyle(ss)
+	//	注册样式并生成一个 StyleId
+	styleId, err = p.File.NewStyle(ss)
+	if err != nil {
+		return 0, err
+	}
+
+	//	并将样式信息保存到内存中
+	go p.StylePool.Push(styleId, &style)
+
+	//	返回样式信息
+	return styleId, nil
 }
 
 func (p *XLSXFile) SetCellStyle(cellX, cellY string, styleId int) {
@@ -79,4 +92,9 @@ func (p *XLSXFile) InsertPageBreak(cell string) {
 
 func (p *XLSXFile) SetColStyle(columns string, styleId int) {
 	p.File.SetColStyle(p.Sheet, columns, styleId)
+}
+
+func (p *XLSXFile) GetCellStyle(axis string) int {
+	styleId, _ := p.File.GetCellStyle(p.Sheet, axis)
+	return styleId
 }

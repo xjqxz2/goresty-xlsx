@@ -36,6 +36,7 @@ func CreateXLSXFile(name string, defaultSheetName string) (handle int) {
 		ResourceId: resourceId,
 		File:       excelize.NewFile(),
 		Name:       name,
+		StylePool:  NewStylePool(),
 	}
 
 	//	设置工作表名称，也可以不填写工作表名称

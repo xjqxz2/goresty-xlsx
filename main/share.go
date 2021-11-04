@@ -91,10 +91,14 @@ func setColStyle(resourceId int, columns string, styleId int) {
 	xlsx.SetColStyle(luaString(columns), styleId)
 }
 
-func luaString(str string) string {
-	return fmt.Sprintf("%s", str)
+//export getCellStyle
+func getCellStyle(resourceId int, axis string) int {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.GetCellStyle(axis)
+
+	return 0
 }
 
-func main() {
-
+func luaString(str string) string {
+	return fmt.Sprintf("%s", str)
 }
