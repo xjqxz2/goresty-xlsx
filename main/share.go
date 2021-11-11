@@ -94,16 +94,16 @@ func setColStyle(resourceId int, columns string, styleId int) {
 //export getCellStyle
 func getCellStyle(resourceId int, axis string) int {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	xlsx.GetCellStyle(axis)
+	xlsx.GetCellStyle(luaString(axis))
 
 	return 0
 }
 
 //实验功能
 //export appendBoardStyle
-func AppendBoardStyle(resourceId int, board, axis string) int {
+func appendBoardStyle(resourceId int, board, axis string) int {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
-	return xlsx.AppendBoardStyle(board, axis)
+	return xlsx.AppendBoardStyle(luaString(board), luaString(axis))
 }
 
 func luaString(str string) string {

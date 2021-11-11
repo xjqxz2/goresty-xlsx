@@ -37,6 +37,9 @@ extern void setColWidth(GoInt resourceId, GoString startCol, GoString endCol, Go
 extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
 extern void insertPageBreak(GoInt resourceId, GoString cell);
 extern void setColStyle(GoInt resourceId, GoString columns, GoInt styleId);
+extern GoInt getCellStyle(GoInt resourceId, GoString axis);
+//实验功能
+extern GoInt appendBoardStyle(GoInt resourceId, GoString board, GoString axis);
 ]]
 
 local Excel = {
@@ -139,5 +142,14 @@ function Excel:setColStyle(columns ,styleId)
     shex.setColStyle(self.resourceId,GoString(columns),tonumber(styleId))
 end
 
+-- 获取单元格样式
+function Excel:getCellStyle(axis)
+    shex.getCellStyle(self.resourceId,GoString(axis))
+end
+
+-- 追加单元格线条样式
+function Excel:appendBoardStyle(board ,axis)
+    return shex.appendBoardStyle(self.resourceId, GoString(board), GoString(axis))
+end
 
 return Excel

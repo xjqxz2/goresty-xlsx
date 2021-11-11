@@ -112,6 +112,9 @@ func (p *XLSXFile) AppendBoardStyle(style, axis string) int {
 	//	再在样式池中查找这个样式ID对应的样式表
 	origin := p.StylePool.GetStyleInfo(styleId)
 
+	if origin.Border == nil {
+		origin.Border = []excelize.Border{}
+	}
 	//	将线条样式追加至原样式中
 	origin.Border = append(origin.Border, border)
 

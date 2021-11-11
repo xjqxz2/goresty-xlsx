@@ -81,6 +81,10 @@ extern void setColWidth(GoInt resourceId, GoString startCol, GoString endCol, Go
 extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
 extern void insertPageBreak(GoInt resourceId, GoString cell);
 extern void setColStyle(GoInt resourceId, GoString columns, GoInt styleId);
+extern GoInt getCellStyle(GoInt resourceId, GoString axis);
+
+//实验功能
+extern GoInt appendBoardStyle(GoInt resourceId, GoString board, GoString axis);
 
 #ifdef __cplusplus
 }
