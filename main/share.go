@@ -99,6 +99,13 @@ func getCellStyle(resourceId int, axis string) int {
 	return 0
 }
 
+//实验功能
+//export appendBoardStyle
+func AppendBoardStyle(resourceId int, board, axis string) int {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	return xlsx.AppendBoardStyle(board, axis)
+}
+
 func luaString(str string) string {
 	return fmt.Sprintf("%s", str)
 }
