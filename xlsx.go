@@ -98,3 +98,36 @@ func (p *XLSXFile) GetCellStyle(axis string) int {
 	styleId, _ := p.File.GetCellStyle(p.Sheet, axis)
 	return styleId
 }
+
+//	追加一个样式
+//	它会生成一个新的样式ID ，并且会把新的样式返回给调用者
+func (p *XLSXFile) AppendBoardStyle(style, axis string) int {
+	//	首先先把 Border 的样式先解析出来
+	var border excelize.Border
+	json.Unmarshal([]byte(style), &border)
+
+	//	先获取单元格原样式
+	styleId := p.GetCellStyle(axis)
+
+	//	再在样式池中查找这个样式ID对应的样式表
+	origin := p.StylePool.GetStyleInfo(styleId)
+
+	//	将线条样式追加至原样式中
+	origin.Border = append(origin.Border, border)
+
+	//	重新注册样式
+	//	注册样式并生成一个 StyleId
+	newStyleId, err := p.File.NewStyle(origin)
+	if err != nil {
+		return 0
+	}
+
+	//	并将样式信息保存到内存中
+	go p.StylePool.Push(newStyleId, origin)
+
+	//	设置单元格样式
+	p.File.SetCellStyle(p.Sheet, axis, axis, newStyleId)
+
+	//	返回样式信息
+	return newStyleId
+}
