@@ -134,7 +134,7 @@ end
 
 -- 插入分页符
 function Excel:insertPageBreak(cell) 
-    shex.insertPageBreak(self.resourceId,cell)
+    shex.insertPageBreak(self.resourceId,GoString(cell))
 end
 
 -- 设置列样式

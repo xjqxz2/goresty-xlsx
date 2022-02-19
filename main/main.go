@@ -42,7 +42,7 @@ func main() {
 	styleRightRAW := `{"type": "bottom","color":"F1223F","style":1}`
 	newStyleId := xlsx.AppendBoardStyle(styleRightRAW, "C3")
 	fmt.Printf("新样式: %d\n", newStyleId)
-
+	xlsx.InsertPageBreak("A5")
 	//	Save file
 	xlsx.Save()
 }
