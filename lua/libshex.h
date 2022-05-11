@@ -85,6 +85,7 @@ extern GoInt getCellStyle(GoInt resourceId, GoString axis);
 
 //实验功能
 extern GoInt appendBoardStyle(GoInt resourceId, GoString board, GoString axis);
+extern GoInt setPageMargins(GoInt resourceId, GoFloat64 top, GoFloat64 left, GoFloat64 right, GoFloat64 bottom, GoFloat64 header, GoFloat64 footer);
 
 #ifdef __cplusplus
 }

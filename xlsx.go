@@ -162,5 +162,5 @@ func (p *XLSXFile) SetPageMargins(top, left, right, bottom, header, footer float
 		opts = append(opts, excelize.PageMarginFooter(footer))
 	}
 
-	p.File.SetPageMargins(p.Sheet,opts...)
+	p.File.SetPageMargins(p.Sheet, opts...)
 }

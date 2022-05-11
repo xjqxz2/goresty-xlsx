@@ -106,6 +106,14 @@ func appendBoardStyle(resourceId int, board, axis string) int {
 	return xlsx.AppendBoardStyle(luaString(board), luaString(axis))
 }
 
+//export setPageMargins
+func setPageMargins(resourceId int, top, left, right, bottom, header, footer float64) int {
+	xlsx, _ := shex.SearchXLSFile(resourceId)
+	xlsx.SetPageMargins(top, left, right, bottom, header, footer)
+
+	return 0
+}
+
 func luaString(str string) string {
 	return fmt.Sprintf("%s", str)
 }

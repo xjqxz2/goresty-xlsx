@@ -40,6 +40,7 @@ extern void setColStyle(GoInt resourceId, GoString columns, GoInt styleId);
 extern GoInt getCellStyle(GoInt resourceId, GoString axis);
 //实验功能
 extern GoInt appendBoardStyle(GoInt resourceId, GoString board, GoString axis);
+extern GoInt setPageMargins(GoInt resourceId, GoFloat64 top, GoFloat64 left, GoFloat64 right, GoFloat64 bottom, GoFloat64 header, GoFloat64 footer);
 ]]
 
 local Excel = {
@@ -151,5 +152,12 @@ end
 function Excel:appendBoardStyle(board ,axis)
     return shex.appendBoardStyle(self.resourceId, GoString(board), GoString(axis))
 end
+
+-- 设置工作表页边距
+-- 若不想修改某一个值的默认值请将其值设置为 -1 ,参数都应该是小数点（Float64)
+-- 如 Excel:setPageMargins(-1.0, 1.0, 0.0, 1.2, 2.0, 19.0)
+function Excel:setPageMargins(top, left, right, bottom, header, footer)
+    return shex.setPageMargins(self.resourceId,top, left, right, bottom, header, footer)
+end 
 
 return Excel
