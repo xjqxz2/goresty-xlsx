@@ -134,3 +134,33 @@ func (p *XLSXFile) AppendBoardStyle(style, axis string) int {
 	//	返回样式信息
 	return newStyleId
 }
+
+func (p *XLSXFile) SetPageMargins(top, left, right, bottom, header, footer float64) {
+	var opts []excelize.PageMarginsOptions
+
+	if top > -1 {
+		opts = append(opts, excelize.PageMarginTop(top))
+	}
+
+	if left > -1 {
+		opts = append(opts, excelize.PageMarginLeft(left))
+	}
+
+	if right > -1 {
+		opts = append(opts, excelize.PageMarginRight(right))
+	}
+
+	if bottom > -1 {
+		opts = append(opts, excelize.PageMarginBottom(bottom))
+	}
+
+	if header > -1 {
+		opts = append(opts, excelize.PageMarginHeader(header))
+	}
+
+	if footer > -1 {
+		opts = append(opts, excelize.PageMarginFooter(footer))
+	}
+
+	p.File.SetPageMargins(p.Sheet,opts...)
+}
