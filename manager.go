@@ -16,11 +16,11 @@ var (
 	rmu       sync.RWMutex
 )
 
-//	创建一个 XLSX 文件
-//	输入文件名、默认工作表名（选填），即可在内存中创建一个 XLSX文件
-//	当创建成功时，系统会返回一个 ResourceId 此ID即为文件句柄
-//	接下来可使用该句柄来执行 Excel 对应的操作
-func CreateXLSXFile(name string, defaultSheetName string) (handle int) {
+// 创建一个 XLSX 文件
+// 输入文件名、默认工作表名（选填），即可在内存中创建一个 XLSX文件
+// 当创建成功时，系统会返回一个 ResourceId 此ID即为文件句柄
+// 接下来可使用该句柄来执行 Excel 对应的操作
+func CreateXLSXFile(name, defaultSheetName string) (handle int) {
 	rmu.Lock()
 	defer rmu.Unlock()
 
@@ -56,9 +56,9 @@ func CreateXLSXFile(name string, defaultSheetName string) (handle int) {
 	return resourceId
 }
 
-//	通过 文件句柄 搜索XLSX在内存中的映射
-//	若未找到文件则会返回一个错误
-//	否则会返回一个 XLSXFile 对象
+// 通过 文件句柄 搜索XLSX在内存中的映射
+// 若未找到文件则会返回一个错误
+// 否则会返回一个 XLSXFile 对象
 func SearchXLSFile(resourceId int) (*XLSXFile, error) {
 	rmu.RLock()
 	defer rmu.RUnlock()
@@ -71,14 +71,14 @@ func SearchXLSFile(resourceId int) (*XLSXFile, error) {
 	return xlsx, nil
 }
 
-//	释放文件句柄
+// 释放文件句柄
 func Release(resourceId int) {
 	rmu.Lock()
 	defer rmu.Unlock()
 	delete(resources, resourceId)
 }
 
-//	生成一个随机的文件句柄
+// 生成一个随机的文件句柄
 func randomInt() (int, error) {
 	r := rand.New(rand.NewSource(time.Now().UnixNano()))
 

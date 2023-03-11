@@ -16,14 +16,14 @@ type XLSXFile struct {
 	StylePool  *StylePool
 }
 
-//	Select a sheet
+// Select a sheet
 func (p *XLSXFile) Select(sheet string, replaceDefaultSheetName bool) *XLSXFile {
 	index := 0
 
 	if value, ok := p.Sheets.Load(sheet); ok {
 		index = value.(int)
 	} else {
-		index = p.File.NewSheet(sheet)
+		index, _ = p.File.NewSheet(sheet)
 		p.Sheets.Store(sheet, index)
 
 		if replaceDefaultSheetName {
@@ -37,7 +37,6 @@ func (p *XLSXFile) Select(sheet string, replaceDefaultSheetName bool) *XLSXFile 
 	return p
 }
 
-//
 func (p *XLSXFile) Cell(index, value string) *XLSXFile {
 	p.File.SetCellValue(p.Sheet, index, value)
 	return p
@@ -48,7 +47,7 @@ func (p *XLSXFile) Merge(start, end string) *XLSXFile {
 	return p
 }
 
-//	注册一个新样式
+// 注册一个新样式
 func (p *XLSXFile) RegisterStyle(ss string) (styleId int, err error) {
 	var style excelize.Style
 
@@ -58,7 +57,7 @@ func (p *XLSXFile) RegisterStyle(ss string) (styleId int, err error) {
 	}
 
 	//	注册样式并生成一个 StyleId
-	styleId, err = p.File.NewStyle(ss)
+	styleId, err = p.File.NewStyle(&style)
 	if err != nil {
 		return 0, err
 	}
@@ -71,15 +70,15 @@ func (p *XLSXFile) RegisterStyle(ss string) (styleId int, err error) {
 }
 
 func (p *XLSXFile) SetCellStyle(cellX, cellY string, styleId int) {
-	p.File.SetCellStyle(p.Sheet, cellX, cellY, styleId)
+	_ = p.File.SetCellStyle(p.Sheet, cellX, cellY, styleId)
 }
 
 func (p *XLSXFile) SetColWidth(startCol, endCol string, width float64) {
-	p.File.SetColWidth(p.Sheet, startCol, endCol, width)
+	_ = p.File.SetColWidth(p.Sheet, startCol, endCol, width)
 }
 
 func (p *XLSXFile) SetRowHeight(row int, height float64) {
-	p.File.SetRowHeight(p.Sheet, row, height)
+	_ = p.File.SetRowHeight(p.Sheet, row, height)
 }
 
 func (p *XLSXFile) Save() bool {
@@ -87,11 +86,11 @@ func (p *XLSXFile) Save() bool {
 }
 
 func (p *XLSXFile) InsertPageBreak(cell string) {
-	p.File.InsertPageBreak(p.Sheet, cell)
+	_ = p.File.InsertPageBreak(p.Sheet, cell)
 }
 
 func (p *XLSXFile) SetColStyle(columns string, styleId int) {
-	p.File.SetColStyle(p.Sheet, columns, styleId)
+	_ = p.File.SetColStyle(p.Sheet, columns, styleId)
 }
 
 func (p *XLSXFile) GetCellStyle(axis string) int {
@@ -99,8 +98,8 @@ func (p *XLSXFile) GetCellStyle(axis string) int {
 	return styleId
 }
 
-//	追加一个样式
-//	它会生成一个新的样式ID ，并且会把新的样式返回给调用者
+// 追加一个样式
+// 它会生成一个新的样式ID ，并且会把新的样式返回给调用者
 func (p *XLSXFile) AppendBoardStyle(style, axis string) int {
 	//	首先先把 Border 的样式先解析出来
 	var border excelize.Border
@@ -136,31 +135,31 @@ func (p *XLSXFile) AppendBoardStyle(style, axis string) int {
 }
 
 func (p *XLSXFile) SetPageMargins(top, left, right, bottom, header, footer float64) {
-	var opts []excelize.PageMarginsOptions
+	var opts excelize.PageLayoutMarginsOptions
 
 	if top > -1 {
-		opts = append(opts, excelize.PageMarginTop(top))
+		opts.Top = &top
 	}
 
 	if left > -1 {
-		opts = append(opts, excelize.PageMarginLeft(left))
+		opts.Left = &left
 	}
 
 	if right > -1 {
-		opts = append(opts, excelize.PageMarginRight(right))
+		opts.Right = &right
 	}
 
 	if bottom > -1 {
-		opts = append(opts, excelize.PageMarginBottom(bottom))
+		opts.Bottom = &bottom
 	}
 
 	if header > -1 {
-		opts = append(opts, excelize.PageMarginHeader(header))
+		opts.Header = &header
 	}
 
 	if footer > -1 {
-		opts = append(opts, excelize.PageMarginFooter(footer))
+		opts.Footer = &footer
 	}
 
-	p.File.SetPageMargins(p.Sheet, opts...)
+	_ = p.File.SetPageMargins(p.Sheet, &opts)
 }

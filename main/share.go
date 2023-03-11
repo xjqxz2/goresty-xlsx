@@ -99,7 +99,6 @@ func getCellStyle(resourceId int, axis string) int {
 	return 0
 }
 
-//实验功能
 //export appendBoardStyle
 func appendBoardStyle(resourceId int, board, axis string) int {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
