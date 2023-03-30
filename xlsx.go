@@ -128,7 +128,7 @@ func (p *XLSXFile) AppendBoardStyle(style, axis string) int {
 	go p.StylePool.Push(newStyleId, origin)
 
 	//	设置单元格样式
-	p.File.SetCellStyle(p.Sheet, axis, axis, newStyleId)
+	_ = p.File.SetCellStyle(p.Sheet, axis, axis, newStyleId)
 
 	//	返回样式信息
 	return newStyleId
