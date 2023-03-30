@@ -69,7 +69,10 @@ function Excel:new(filename, defaultSheetName)
         defaultSheetName = "Sheet1"
     end
 
-    self.resourceId = shex.createExcelFile(GoString(filename), GoString(defaultSheetName))
+    shex.createExcelFile(GoString(filename), GoString(defaultSheetName))
+
+    --  废除 ResourceID
+    self.resourceId = 0
     return o
 end
 
