@@ -32,14 +32,14 @@ func CreateXLSXFile(name, defaultSheetName string) (handle int) {
 	return 0
 }
 
-// 通过 文件句柄 搜索XLSX在内存中的映射
+// SearchXLSFile 通过 文件句柄 搜索XLSX在内存中的映射
 // 若未找到文件则会返回一个错误
 // 否则会返回一个 XLSXFile 对象
 func SearchXLSFile(resourceId int) (*XLSXFile, error) {
 	return xlsx, nil
 }
 
-// 释放文件句柄
+// Release 释放文件句柄
 func Release(resourceId int) {
 
 }
