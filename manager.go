@@ -13,7 +13,15 @@ var xlsx *XLSXFile
 func CreateXLSXFile(name, defaultSheetName string) (handle int) {
 
 	//	生成一个 Excel 对象
-	xlsx = &XLSXFile{
+	xlsx = OpenXLSXFile(name, defaultSheetName)
+
+	//	一切OK，返回一个 XLSX 文件句柄
+	return 0
+}
+
+func OpenXLSXFile(name, defaultSheetName string) *XLSXFile {
+	//	生成一个 Excel 对象
+	x := &XLSXFile{
 		File:      excelize.NewFile(),
 		Name:      name,
 		StylePool: NewStylePool(),
@@ -23,13 +31,12 @@ func CreateXLSXFile(name, defaultSheetName string) (handle int) {
 	//	当工作表名称未填写时，则使用 Sheet1 来代替
 	if defaultSheetName == "" {
 		//	Select Sheet
-		xlsx.Select("Sheet1", false)
+		x.Select("Sheet1", false)
 	} else {
-		xlsx.Select(defaultSheetName, true)
+		x.Select(defaultSheetName, true)
 	}
 
-	//	一切OK，返回一个 XLSX 文件句柄
-	return 0
+	return x
 }
 
 // SearchXLSFile 通过 文件句柄 搜索XLSX在内存中的映射

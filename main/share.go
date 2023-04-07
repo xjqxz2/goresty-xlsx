@@ -22,6 +22,15 @@ func createExcelFile(filename string, defaultSheetName string) int {
 	return shex.CreateXLSXFile(luaString(filename), luaString(defaultSheetName))
 }
 
+/**
+ * 打开一个 Excel 文件
+ * 返回一个 XLSXFile 文件对象
+ */
+//export openExcelFile
+func openExcelFile(filename string, defaultSheetName string) *shex.XLSXFile {
+	return shex.OpenXLSXFile(luaString(filename), luaString(defaultSheetName))
+}
+
 //export cell
 func cell(resourceId int, tabIndex, val string) {
 	xlsx, _ := shex.SearchXLSFile(resourceId)
