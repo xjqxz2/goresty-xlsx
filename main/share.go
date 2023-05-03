@@ -1,11 +1,16 @@
 package main
 
-import "C"
 import (
 	"fmt"
-
 	"peon.top/shex"
 )
+
+/*
+struct XLSXFile {
+}
+*/
+
+import "C"
 
 //export sum
 func sum(a, b int) int {
@@ -27,8 +32,9 @@ func createExcelFile(filename string, defaultSheetName string) int {
  * 返回一个 XLSXFile 文件对象
  */
 //export openExcelFile
-func openExcelFile(filename string, defaultSheetName string) *shex.XLSXFile {
-	return shex.OpenXLSXFile(luaString(filename), luaString(defaultSheetName))
+func openExcelFile(filename string, defaultSheetName string) C.struct_XLSXFile {
+	shex.OpenXLSXFile(luaString(filename), luaString(defaultSheetName))
+	return C.struct_XLSXFile{}
 }
 
 //export cell
