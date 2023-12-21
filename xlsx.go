@@ -16,7 +16,8 @@ type XLSXFile struct {
 	StylePool  *StylePool
 }
 
-// Select a sheet
+// Select
+// a sheet
 func (p *XLSXFile) Select(sheet string, replaceDefaultSheetName bool) *XLSXFile {
 	index := 0
 
