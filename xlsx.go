@@ -8,10 +8,10 @@ import (
 )
 
 type XLSXFile struct {
+	*excelize.File
 	ResourceId int
 	Sheet      string
 	Name       string
-	File       *excelize.File
 	Sheets     sync.Map
 	StylePool  *StylePool
 }
