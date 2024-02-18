@@ -38,6 +38,7 @@ func (p *XLSXFile) Select(sheet string, replaceDefaultSheetName bool) *XLSXFile 
 	return p
 }
 
+// Cell 设置一个单元格值
 func (p *XLSXFile) Cell(index, value string) *XLSXFile {
 	p.File.SetCellValue(p.Sheet, index, value)
 	return p
