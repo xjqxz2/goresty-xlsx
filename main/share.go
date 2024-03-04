@@ -108,6 +108,11 @@ func setPageMargins(resourceId int, top, left, right, bottom, header, footer flo
 	return 0
 }
 
+func setCellBool(resourceId int, cell string, value bool) {
+	xlsx, _ := shex.SearchXLSFile()
+	xlsx.SetCellBool(cell, value)
+}
+
 func luaString(str string) string {
 	return fmt.Sprintf("%s", str)
 }

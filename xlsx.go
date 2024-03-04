@@ -165,3 +165,8 @@ func (p *XLSXFile) SetPageMargins(top, left, right, bottom, header, footer float
 
 	_ = p.File.SetPageMargins(p.Sheet, &opts)
 }
+
+// SetCellBool set the cell boolean value
+func (p *XLSXFile) SetCellBool(cell string, value bool) {
+	_ = p.File.SetCellBool(p.Sheet, cell, value)
+}
