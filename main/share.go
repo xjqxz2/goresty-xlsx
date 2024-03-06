@@ -108,9 +108,16 @@ func setPageMargins(resourceId int, top, left, right, bottom, header, footer flo
 	return 0
 }
 
+//export setCellBool
 func setCellBool(resourceId int, cell string, value bool) {
 	xlsx, _ := shex.SearchXLSFile()
 	xlsx.SetCellBool(cell, value)
+}
+
+// mergeCell
+func mergeCell(resourceId int, top, bottom string) {
+	xlsx, _ := shex.SearchXLSFile()
+	xlsx.MergeCell(top, bottom)
 }
 
 func luaString(str string) string {

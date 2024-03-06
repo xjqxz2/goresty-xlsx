@@ -170,3 +170,7 @@ func (p *XLSXFile) SetPageMargins(top, left, right, bottom, header, footer float
 func (p *XLSXFile) SetCellBool(cell string, value bool) {
 	_ = p.File.SetCellBool(p.Sheet, cell, value)
 }
+
+func (p *XLSXFile) MergeCell(topLeftCell, bottomRightCell string) {
+	_ = p.File.MergeCell(p.Sheet, topLeftCell, bottomRightCell)
+}
