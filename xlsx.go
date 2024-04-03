@@ -174,3 +174,10 @@ func (p *XLSXFile) SetCellBool(cell string, value bool) {
 func (p *XLSXFile) MergeCell(topLeftCell, bottomRightCell string) {
 	_ = p.File.MergeCell(p.Sheet, topLeftCell, bottomRightCell)
 }
+
+func (p *XLSXFile) SetPassword(password string) {
+	_ = p.File.ProtectWorkbook(&excelize.WorkbookProtectionOptions{
+		Password:      password,
+		LockStructure: true,
+	})
+}

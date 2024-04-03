@@ -114,6 +114,12 @@ func setCellBool(resourceId int, cell string, value bool) {
 	xlsx.SetCellBool(cell, value)
 }
 
+//export setPassword
+func setPassword(resourceId int, password string) {
+	xlsx, _ := shex.SearchXLSFile()
+	xlsx.SetPassword(password)
+}
+
 // mergeCell
 func mergeCell(resourceId int, top, bottom string) {
 	xlsx, _ := shex.SearchXLSFile()
