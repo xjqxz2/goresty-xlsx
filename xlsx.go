@@ -181,3 +181,7 @@ func (p *XLSXFile) SetPassword(password string) {
 		LockStructure: true,
 	})
 }
+
+func (p *XLSXFile) UnSetPassword(password string) {
+	_ = p.File.UnprotectWorkbook(password)
+}

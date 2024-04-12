@@ -120,6 +120,11 @@ func setPassword(resourceId int, password string) {
 	xlsx.SetPassword(password)
 }
 
+func UnprotectSheet(resourceId int, sheet, password string) {
+	xlsx, _ := shex.SearchXLSFile()
+	xlsx.UnSetPassword(password)
+}
+
 // mergeCell
 func mergeCell(resourceId int, top, bottom string) {
 	xlsx, _ := shex.SearchXLSFile()
