@@ -39,6 +39,9 @@ extern void insertPageBreak(GoInt resourceId, GoString cell);
 extern void setColStyle(GoInt resourceId, GoString columns, GoInt styleId);
 extern GoInt getCellStyle(GoInt resourceId, GoString axis);
 extern void setRowHeight(GoInt resourceId, GoInt row, GoFloat64 height);
+extern void setPassword(GoInt resourceId, GoString password);
+extern void unProtectSheet(GoInt resourceId, GoString sheet, GoString password);
+extern void mergeCell(GoInt resourceId, GoString top, GoString bottom);
 //实验功能
 extern GoInt appendBoardStyle(GoInt resourceId, GoString board, GoString axis);
 extern GoInt setPageMargins(GoInt resourceId, GoFloat64 top, GoFloat64 left, GoFloat64 right, GoFloat64 bottom, GoFloat64 header, GoFloat64 footer);

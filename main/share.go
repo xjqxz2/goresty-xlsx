@@ -12,6 +12,10 @@ struct XLSXFile {
 
 import "C"
 
+func main() {
+
+}
+
 //export createExcelFile
 func createExcelFile(filename string, defaultSheetName string) uint8 {
 	return BoolToUint8(shex.CreateXLSXFile(luaString(filename), luaString(defaultSheetName)) == nil)
@@ -126,7 +130,7 @@ func unProtectSheet(resourceId int, sheet, password string) {
 	xlsx.UnSetPassword(password)
 }
 
-// mergeCell
+//export mergeCell
 func mergeCell(resourceId int, top, bottom string) {
 	xlsx, _ := shex.SearchXLSFile()
 	xlsx.MergeCell(top, bottom)
