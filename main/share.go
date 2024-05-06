@@ -136,6 +136,12 @@ func mergeCell(resourceId int, top, bottom string) {
 	xlsx.MergeCell(top, bottom)
 }
 
+//export setColVisible
+func setColVisible(resourceId int, col string, visible bool) {
+	xlsx, _ := shex.SearchXLSFile()
+	xlsx.SetColVisible(luaString(col), visible)
+}
+
 func luaString(str string) string {
 	return fmt.Sprintf("%s", str)
 }
