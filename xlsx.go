@@ -189,3 +189,7 @@ func (p *XLSXFile) UnSetPassword(password string) {
 func (p *XLSXFile) SetColVisible(col string, visible bool) {
 	_ = p.File.SetColVisible(p.Sheet, col, visible)
 }
+
+func (p *XLSXFile) SetCellInt(sheet, cell string, value int) {
+	_ = p.File.SetCellInt(sheet, cell, value)
+}

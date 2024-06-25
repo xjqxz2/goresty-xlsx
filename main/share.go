@@ -142,6 +142,12 @@ func setColVisible(resourceId int, col string, visible bool) {
 	xlsx.SetColVisible(luaString(col), visible)
 }
 
+//export setCellInt
+func setCellInt(resourceId int, sheet, cell string, value int) {
+	xlsx, _ := shex.SearchXLSFile()
+	xlsx.SetCellInt(luaString(sheet), luaString(cell), value)
+}
+
 func luaString(str string) string {
 	return fmt.Sprintf("%s", str)
 }
