@@ -193,3 +193,8 @@ func (p *XLSXFile) SetColVisible(col string, visible bool) {
 func (p *XLSXFile) SetCellInt(sheet, cell string, value int) {
 	_ = p.File.SetCellInt(sheet, cell, value)
 }
+
+func (p *XLSXFile) GetSheetVisible(sheet string) bool {
+	ok, _ := p.File.GetSheetVisible(sheet)
+	return ok
+}
